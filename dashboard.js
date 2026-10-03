@@ -120,15 +120,32 @@ try {
             "statusText"
         );
 
-    const indicator =
-        document.getElementById(
-            "statusIndicator"
-        );
+    const rfidIndicator =
+    document.querySelector(
+        ".rfid-indicator"
+    );
+
+const rfidSlider =
+    document.getElementById(
+        "rfidStatusSlider"
+    );
+
+const rfidStatusText =
+    document.getElementById(
+        "rfidStatusText"
+    );
 
     if (isActive) {
 
-        statusText.textContent =
-            "SIGNED IN";
+    statusText.textContent =
+        "SIGNED IN";
+
+    rfidIndicator.classList.add(
+        "active"
+    );
+
+    rfidStatusText.textContent =
+        "Card Connected";
 
         indicator.textContent =
             "●";
@@ -140,6 +157,12 @@ try {
 
         statusText.textContent =
             "SIGNED OUT";
+	rfidIndicator.classList.remove(
+	    "active"
+	);
+
+	rfidStatusText.textContent =
+   	   "Card Disconnected";
 
         indicator.textContent =
             "●";
