@@ -120,6 +120,8 @@ try {
             "statusText"
         );
 
+    const indicator = document.getElementById("statusIndicator");
+
     const rfidIndicator =
     document.querySelector(
         ".rfid-indicator"
@@ -692,3 +694,4 @@ setInterval(
 refreshDashboard,
 10000
 );
+
