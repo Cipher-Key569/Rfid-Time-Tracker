@@ -10,13 +10,13 @@ PORT = "COM4"
 BAUD_RATE = 9600
 
 USERS = {
-    "22:BC:BF:22": {
-        "name": "Keyona Briggs",
-        "worker_id": "2886776"
+    "11:22:33:44": {
+        "name": "Example User",
+        "worker_id": "0000001"
     },
-    "83:BB:AF:A0": {
-        "name": "Amy Wilde",
-        "worker_id": "2887757"
+    "AA:BB:CC:DD": {
+        "name": "Example User 2",
+        "worker_id": "0000002"
     }
 }
 
