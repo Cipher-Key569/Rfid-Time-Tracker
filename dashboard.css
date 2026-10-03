@@ -1,0 +1,809 @@
+/* =========================================================
+   RFID TIME TRACKER
+   SIMPLE LIGHT PINK POMODORO
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #fff1f5;
+
+    color: #60434c;
+}
+
+.app {
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.topbar {
+    width: 100%;
+
+    padding: 24px 35px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: transparent;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f5a9bc;
+
+    color: white;
+
+    font-size: 22px;
+}
+
+.topbar h1 {
+    margin: 0;
+
+    color: #694650;
+
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.topbar p {
+    margin: 3px 0 0;
+
+    color: #ae7f8b;
+
+    font-size: 13px;
+}
+
+.connection {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #98707c;
+
+    font-size: 13px;
+}
+
+.connection-dot {
+    width: 9px;
+    height: 9px;
+
+    background: #72b886;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 4px #e3f3e7;
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+main {
+    width: min(700px, 92%);
+
+    margin: 20px auto 50px;
+}
+
+
+/* =========================================================
+   CENTRAL CARD
+   ========================================================= */
+
+.status-card {
+    padding: 38px 42px;
+
+    background: #ffffff;
+
+    border-radius: 32px;
+
+    border: 1px solid #f8dce4;
+
+    box-shadow:
+        0 18px 50px rgba(185, 105, 130, 0.12);
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+.pomodoro-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    text-align: left;
+}
+
+.section-label {
+    margin: 0 0 6px;
+
+    color: #bc8795;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.6px;
+}
+
+.pomodoro-header h2 {
+    margin: 0;
+
+    color: #694650;
+
+    font-size: 22px;
+}
+
+.status-indicator {
+    color: #d8a4b1;
+
+    font-size: 25px;
+}
+
+.status-indicator.active {
+    color: #ef8fa8;
+
+    text-shadow:
+        0 0 12px rgba(239, 143, 168, 0.3);
+}
+
+.status-indicator.off {
+    color: #d8b8c1;
+}
+
+
+/* =========================================================
+   WORKER
+   ========================================================= */
+
+.worker-area {
+    margin-top: 28px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.avatar {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffe1e9;
+
+    color: #df829b;
+
+    font-size: 25px;
+}
+
+.worker-name {
+    text-align: left;
+
+    color: #694650;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+.worker-id {
+    margin-top: 3px;
+
+    text-align: left;
+
+    color: #b18490;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   MAIN TIMER
+   ========================================================= */
+
+.timer-area {
+    margin: 32px auto 25px;
+
+    width: 310px;
+    height: 310px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff9fa 0%,
+            #fff0f4 65%,
+            #ffe1e9 100%
+        );
+
+    border: 8px solid #f9d0dc;
+
+    box-shadow:
+        inset 0 0 25px rgba(210, 120, 145, 0.08),
+        0 12px 30px rgba(190, 105, 130, 0.12);
+}
+
+.timer-label {
+    color: #bc8795;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.timer {
+    margin-top: 8px;
+
+    color: #694650;
+
+    font-size: 48px;
+
+    font-weight: 300;
+
+    letter-spacing: 2px;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.clock-info {
+    margin-top: 8px;
+
+    color: #b18490;
+
+    font-size: 12px;
+}
+
+.clock-info span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #8f6874;
+}
+
+
+/* =========================================================
+   RFID
+   ========================================================= */
+
+.rfid-indicator {
+    margin: 0 auto 25px;
+
+    width: fit-content;
+
+    min-width: 230px;
+
+    padding: 10px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: #fff6f8;
+
+    border: 1px solid #f7dce4;
+
+    border-radius: 999px;
+
+    text-align: left;
+}
+
+.rfid-icon {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f5a9bc;
+
+    color: white;
+
+    font-size: 8px;
+
+    font-weight: bold;
+}
+
+.rfid-indicator span {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #b18490;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+.rfid-indicator strong {
+    color: #68a878;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   BREAK
+   ========================================================= */
+
+.break-controls {
+    padding: 18px 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    background: #fff6f8;
+
+    border: 1px solid #f7dce4;
+
+    border-radius: 20px;
+
+    text-align: left;
+}
+
+.break-info h3 {
+    margin: 0;
+
+    color: #694650;
+
+    font-size: 16px;
+}
+
+.break-times {
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 7px;
+
+    color: #a77a87;
+
+    font-size: 11px;
+}
+
+.break-times strong {
+    color: #79535e;
+}
+
+.break-actions {
+    display: flex;
+
+    gap: 8px;
+}
+
+.break-button {
+    border: none;
+
+    padding: 10px 16px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    transition: 0.2s ease;
+}
+
+.break-button.primary {
+    background: #f3a5ba;
+
+    color: white;
+
+    box-shadow:
+        0 5px 12px rgba(215, 120, 145, 0.18);
+}
+
+.break-button.primary:hover {
+    background: #ed8fa7;
+
+    transform: translateY(-1px);
+}
+
+.break-button.secondary {
+    background: #f6dce3;
+
+    color: #8f6874;
+}
+
+.break-button:disabled {
+    opacity: 0.45;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   QUICK SUMMARY
+   ========================================================= */
+
+.quick-summary {
+    margin-top: 25px;
+
+    padding-top: 22px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    border-top: 1px solid #f4dfe5;
+}
+
+.quick-summary div {
+    padding: 0 10px;
+
+    border-right: 1px solid #f4dfe5;
+}
+
+.quick-summary div:last-child {
+    border-right: none;
+}
+
+.quick-summary span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #b18490;
+
+    font-size: 11px;
+}
+
+.quick-summary strong {
+    color: #694650;
+
+    font-size: 17px;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* =========================================================
+   NET WORK SUMMARY
+   ========================================================= */
+
+.net-summary {
+    margin-top: 15px;
+
+    padding: 18px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    background: rgba(255, 255, 255, 0.65);
+
+    border: 1px solid #f8dce4;
+
+    border-radius: 20px;
+}
+
+.net-summary div {
+    text-align: center;
+}
+
+.net-summary span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #b18490;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 0.5px;
+}
+
+.net-summary strong {
+    color: #76515d;
+
+    font-size: 15px;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* =========================================================
+   HISTORY
+   ========================================================= */
+
+.history-card {
+    margin-top: 20px;
+
+    padding: 25px;
+
+    background: white;
+
+    border-radius: 24px;
+
+    border: 1px solid #f8dce4;
+
+    box-shadow:
+        0 10px 30px rgba(185, 105, 130, 0.08);
+}
+
+.history-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+.history-header h2 {
+    margin: 0;
+
+    color: #694650;
+
+    font-size: 19px;
+}
+
+.history-actions {
+    display: flex;
+
+    gap: 8px;
+}
+
+.refresh-button,
+.export-button {
+    padding: 9px 14px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: #f5a9bc;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.refresh-button:hover,
+.export-button:hover {
+    background: #ed8fa7;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #f5e3e8;
+
+    font-size: 12px;
+}
+
+th {
+    color: #ad7d8a;
+
+    font-size: 10px;
+
+    letter-spacing: 0.5px;
+
+    text-transform: uppercase;
+}
+
+td {
+    color: #72525d;
+}
+
+tbody tr:hover {
+    background: #fff8fa;
+}
+
+.loading {
+    text-align: center;
+
+    padding: 25px;
+
+    color: #ae7f8b;
+}
+
+.status-completed {
+    color: #68a878;
+
+    font-weight: bold;
+}
+
+.status-active {
+    color: #df7e98;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    padding: 25px;
+
+    text-align: center;
+
+    color: #ae7f8b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .topbar {
+        padding: 20px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+    main {
+        width: 94%;
+
+        margin-top: 10px;
+    }
+
+    .status-card {
+        padding: 28px 20px;
+
+        border-radius: 25px;
+    }
+
+    .timer-area {
+        width: 250px;
+        height: 250px;
+    }
+
+    .timer {
+        font-size: 38px;
+    }
+
+    .break-controls {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .break-actions {
+        width: 100%;
+    }
+
+    .break-button {
+        flex: 1;
+    }
+
+    .quick-summary {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .quick-summary div {
+        padding: 8px;
+
+        border-right: none;
+
+        border-bottom: 1px solid #f4dfe5;
+    }
+
+    .quick-summary div:last-child {
+        border-bottom: none;
+    }
+
+    .net-summary {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .history-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+}

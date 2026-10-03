@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RFID Time Tracker</title>
+
+    <link rel="stylesheet" href="/dashboard.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Simple Header -->
+    <header class="topbar">
+
+        <div class="brand">
+            <div class="brand-icon">♡</div>
+
+            <div>
+                <h1>RFID Time Tracker</h1>
+                <p>Work Session</p>
+            </div>
+        </div>
+
+        <div class="connection">
+            <span class="connection-dot"></span>
+            <span>Connected</span>
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- =================================================
+             CENTRAL POMODORO CARD
+             ================================================= -->
+
+        <section class="status-card">
+
+            <div class="pomodoro-header">
+
+                <div>
+                    <p class="section-label">CURRENT SESSION</p>
+                    <h2 id="statusText">Checking...</h2>
+                </div>
+
+                <div id="statusIndicator" class="status-indicator">
+                    ●
+                </div>
+
+            </div>
+
+
+            <!-- Worker -->
+            <div class="worker-area">
+
+                <div class="avatar">
+                    ♡
+                </div>
+
+                <div>
+                    <div class="worker-name" id="workerName">
+                        --
+                    </div>
+
+                    <div class="worker-id">
+                        Worker ID:
+                        <span id="workerId">--</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Main Timer -->
+            <div class="timer-area">
+
+                <div class="timer-label">
+                    WORK SESSION
+                </div>
+
+                <div id="elapsedTime" class="timer">
+                    00:00:00
+                </div>
+
+                <div class="clock-info">
+                    Started
+                    <span id="signInTime">--</span>
+                </div>
+
+            </div>
+
+
+            <!-- RFID -->
+            <div class="rfid-indicator">
+
+                <div class="rfid-icon">
+                    RFID
+                </div>
+
+                <div>
+                    <span>RFID STATUS</span>
+
+                    <strong>
+                        Card Connected
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <!-- Break -->
+            <div class="break-controls">
+
+                <div class="break-info">
+
+                    <p class="section-label">
+                        BREAK
+                    </p>
+
+                    <h3 id="breakStatusText">
+                        No Break
+                    </h3>
+
+                    <div class="break-times">
+
+                        <span>
+                            Current:
+                            <strong id="breakElapsedTime">
+                                00:00:00
+                            </strong>
+                        </span>
+
+                        <span>
+                            Today:
+                            <strong id="breakTotal">
+                                00:00:00
+                            </strong>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="break-actions">
+
+                    <button
+                        id="startBreakButton"
+                        class="break-button primary"
+                    >
+                        Start Break
+                    </button>
+
+                    <button
+                        id="endBreakButton"
+                        class="break-button secondary"
+                        disabled
+                    >
+                        End Break
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Today's totals inside central card -->
+            <div class="quick-summary">
+
+                <div>
+                    <span>Today</span>
+                    <strong id="todayTotal">
+                        00:00:00
+                    </strong>
+                </div>
+
+                <div>
+                    <span>This Week</span>
+                    <strong id="weekTotal">
+                        00:00:00
+                    </strong>
+                </div>
+
+                <div>
+                    <span>This Month</span>
+                    <strong id="monthTotal">
+                        00:00:00
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NET WORK TOTALS
+             ================================================= -->
+
+        <section class="net-summary">
+
+            <div>
+                <span>Net Work Today</span>
+                <strong id="netTodayTotal">
+                    00:00:00
+                </strong>
+            </div>
+
+            <div>
+                <span>Net Work This Week</span>
+                <strong id="netWeekTotal">
+                    00:00:00
+                </strong>
+            </div>
+
+            <div>
+                <span>Net Work This Month</span>
+                <strong id="netMonthTotal">
+                    00:00:00
+                </strong>
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             HISTORY
+             ================================================= -->
+
+        <section class="history-card">
+
+            <div class="history-header">
+
+                <div>
+                    <p class="section-label">
+                        WORK SESSION HISTORY
+                    </p>
+
+                    <h2>
+                        Recent Sessions
+                    </h2>
+                </div>
+
+
+                <div class="history-actions">
+
+                    <button
+                        id="refreshButton"
+                        class="refresh-button"
+                    >
+                        Refresh
+                    </button>
+
+                    <a
+                        href="/api/export"
+                        class="export-button"
+                        download="work_sessions.csv"
+                    >
+                        Export CSV
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Clock In</th>
+                        <th>Clock Out</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="historyBody">
+
+                    <tr>
+                        <td
+                            colspan="5"
+                            class="loading"
+                        >
+                            Loading sessions...
+                        </td>
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        RFID Time Tracker · Local Dashboard
+    </footer>
+
+</div>
+
+
+<script src="/dashboard.js"></script>
+
+</body>
+</html>
