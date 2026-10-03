@@ -117,6 +117,8 @@ ACCESS_DENIED,<uid>
 
 ## Dashboard
 
+![RFID Time Tracker Dashboard](screenshots/dashboard.png)
+
 The dashboard provides:
 
 * Current session status
